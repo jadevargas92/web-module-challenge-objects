@@ -15,8 +15,14 @@ The function should:
   Example createMenuItem('tacos', 8, 'Lunch') should return {name: 'tacos', price: 8, category: 'Lunch'}
 */
 
-function createMenuItem(/*Your code here*/){
-    /*Your code here*/
+function createMenuItem(name, price, category){
+    let someObject = {
+      name: name,
+      price: price,
+      category: category
+    }
+
+    return someObject;
 }
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1b: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -28,6 +34,10 @@ Test your createMenuItems function by doing the following:
   
   For example: createMenuItem("pizza",5,"lunch") would return this as the object: {name:"Pizza",price:5,category:"lunch"}
 */
+
+let menuItemOne = createMenuItem('pizza', 5, 'lunch');
+let menuItemTwo = createMenuItem('burger', 7, 'dinner');
+let menuItemThree = createMenuItem('breakfast sandwich', 4, 'breakfast');
 
 
 
@@ -48,7 +58,13 @@ export const burger = {
   name: "Burger", 
   price: 18, 
   category: "Lunch", 
-  /*Your code here*/
+  discount: function (discountType) {
+    if (discountType === 'teacher' || discountType === 'student') {
+      return this.price * .75;
+    } else {
+      return this.price * .9;
+    }
+  }
 }
 
 
@@ -70,7 +86,7 @@ Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
 
-
+console.log(reviews[5].feedback);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -78,6 +94,9 @@ Using the reviews array above do the following: (no function needed)
   1. Following the same format (name, rating, feedback), add a new fictitious review object to the reviews array
   2. log the whole array to the console, make sure the new review is inside of it   
 */
+
+reviews.push({name: 'Jade', rating: 5, feedback: 'This place was outstanding! Great food. I never leave reviews!'})
+console.log(reviews)
 
 
 
@@ -87,6 +106,8 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   2. log the reviews array to the console to check your work
 */
 
+reviews[7].feedback = "this place is chill with really cool people, great for getting work done on weekdays";
+console.log(reviews);
 
 
 
@@ -102,8 +123,9 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(array,desiredIndex) {
+  let reviewer = array[desiredIndex];
+  return `${reviewer.name} gave the restaurant a ${reviewer.rating} star review, and their feedback was: ${reviewer.feedback}`
 }
 
 
@@ -121,8 +143,9 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(array) {
+  let reviewer = array[array.length - 1];
+  return `${reviewer.name} gave the restaurant a ${reviewer.rating} star review, and their feedback was: ${reviewer.feedback}`
 } 
 
 
@@ -143,9 +166,28 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
+//Jades Notes
+// 1) iterate through each index in the array (each index is an object)
+// 2) target the rating in that object
+// 3a) if that rating is is greater than rating range && less than rating range plus 1...
+//  3b) push that review object into the newArray
+// return new Array
+
+ function getReviewByRating(array, ratingRange) {
+   // Create the new array we want to return
+   let specificRatingsArray = [];
+   //We want to iterate through each index in the reviews array and this does
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].rating >= ratingRange && array[i].rating < (ratingRange + 1)) {
+        specificRatingsArray.push(array[i]);
+      }
+    }
+    console.log(specificRatingsArray);
+    return specificRatingsArray;
   }
+
+  getReviewByRating(reviews, 2);
+
 
   
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
@@ -161,9 +203,20 @@ Use the getLongReviews function below to do the following:
   ]
 */
 
-function getLongReviews(/* code here */) {
-    /* code here */
+function getLongReviews(array) {
+  let specificRatingsArray = [];
+    //We want to iterate through each index in the reviews array and this does
+    for (let i = 0; i < array.length; i++) {
+      // checks each index in the array (which is the object), then goes into feedback and .split(' '). checks the length
+      if (array[i].feedback.split(' ').length >= 15) {
+        specificRatingsArray.push(array[i]);
+      }
+    }
+    console.log(specificRatingsArray);
+    return specificRatingsArray;
   }
+
+  getLongReviews(reviews);
   
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
